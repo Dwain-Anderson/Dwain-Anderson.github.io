@@ -135,74 +135,57 @@ main {
   background-size: cover;
   overflow: hidden;
 }
+
 .portfolio-h2 {
   margin-bottom: 20px;
-  border: 1px solid #ddd;
   color: rgb(0, 0, 0);
   text-align: center;
-  border-radius: 5px;
-  padding: 10px; /* Adjust padding */
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.7); 
-  transition: transform 0.3s ease;
 }
 
-
-/* Project Card */
+/* Project List */
 .project-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
-  gap: 20px;
+  display: block;
   margin: 20px 0;
-  padding: 20px;
+  padding: 0;
+  list-style-type: none;
 }
 
-.project-card {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.8); 
-  transition: transform 0.3s ease;
-  text-align: center;
-}
-
-.project-card:hover {
-  transform: translateY(-10px);
-}
-
-.project-image {
-  max-width: 100%;
-  height: auto;
+.project-item {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 15px;
+  padding: 20px; /* Added padding to the text content */
+  margin-bottom: 0; /* Removed spacing between items */
+  background-color: rgba(255, 255, 255, 0.9); /* Light background color with slight transparency */
+  cursor: pointer; /* Make entire item clickable */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-item:hover {
+  background-color: rgba(255, 255, 255, 1); /* Change background on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .project-title {
-  margin: 15px 0 10px 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #333;
+  margin: 0;
 }
 
 .project-desc {
-  margin: 10px 0;
   font-size: 1em;
   color: black;
+  margin: 10px 0 0 0; /* Added margin to text content */
 }
 
-.project-card a {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 15px;
-  background-color: lightskyblue;
-  color: white;
+.project-item a {
+  display: block;
   text-decoration: none;
-  border-radius: 3px;
+  color: inherit; /* Inherit text color */
 }
 
-.project-card a:hover {
-  background-color: blue;
+.project-item a:hover {
+  color: inherit; /* Maintain text color on hover */
 }
+
 
 .coursework-section {
   padding: 20px;
