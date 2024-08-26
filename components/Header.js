@@ -4,7 +4,7 @@ function Header() {
   const backgroundImage = '/assets/winter-1.jpg';
   return (
     <header style={{backgroundImage: `url(${backgroundImage})`}}>
-      <h1>Dwain Anderson::Computer Science </h1>
+      <h1 style={{fontSize: 'x-large'}}>Dwain Anderson :: Software Developer & Self-Proclaimed Scientist</h1>
       <Menu />
     </header>
   );
