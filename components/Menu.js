@@ -6,7 +6,7 @@ import Hamburger from './Hamburger';
 const Menu = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleMenu = () => { setMenuOpen(!menuOpen); };
-    const resumeURL = '/images/resume.pdf';
+    const resumeURL = '/assets/resume.pdf';
     return (
         <div className='menu'>
             <Hamburger toggleMenu={toggleMenu} />

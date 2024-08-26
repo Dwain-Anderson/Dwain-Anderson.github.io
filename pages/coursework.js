@@ -3,7 +3,7 @@ import Footer from '../components/Footer.js';
 
 
 function Coursework() {
-    const backgroundImage = '/images/winter-6.jpg';
+    const backgroundImage = '/assets/winter-6.jpg';
     return (
         <div className='main-coursework'>
             <Header />

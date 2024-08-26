@@ -1,5 +1,5 @@
 function Footer()  {
-    const backgroundImage = '/images/winter-5.jpg';
+    const backgroundImage = '/assets/winter-5.jpg';
     return (
     <footer style={{backgroundImage: `url(${backgroundImage})`}}>
         <h2 className="footer-h2">Contact Information</h2>

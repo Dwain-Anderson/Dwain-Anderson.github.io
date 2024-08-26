@@ -4,7 +4,7 @@ import Footer from '../components/Footer.js';
 import PortfolioDeckOfCards from '../components/PortfolioDeckOfCards.js';
 
 function Home() {
-  const backgroundImage = '/images/winter-8.jpg';
+  const backgroundImage = '/assets/winter-8.jpg';
   return (
       <div className='main'> 
           <Header />
