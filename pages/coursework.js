@@ -8,18 +8,28 @@ function Coursework() {
         <div className='main-coursework'>
             <Header />
             <main className='coursework-section' style={{backgroundImage: `url(${backgroundImage})`}}>
-                <h2 className='coursework-h2'>Relevant Coursework</h2>
+                <h2 className='coursework-h2'>Relevant Coursework</h2> 
+                <div className='coursework-container'>
+                    <h3>Spring 2024 Anticipated (Sophomore)</h3>
+                    <ul className="coursework-list">
+                        <li className='coursework-text'>CS 4820: Intro to Analysis of Algorithms</li>
+                        <li className='coursework-text'>CS 3410: Computer System Organization and Programming</li>
+                        <li className='coursework-text'>STSCI 4520: Statistical Computing</li>
+                        <li className='coursework-text'>MATH 4720: Statistics</li>
+                        <li className='coursework-text'>ECON 3140: Econometrics</li>
+                    </ul>
+                </div>
                 <div className='coursework-container'>
                     <h3>Fall 2024 (Sophomore)</h3>
                     <ul className="coursework-list">
-                        <li className='coursework-text'>CS 3110: Data Structures & Functional Programming</li>
-                        <li className='coursework-text'>CS 3300: Visual Data Analytics for the Web</li>
-                        <li className='coursework-text'>CS 3780: Intro to Machine Learning</li>
                         <li className='coursework-text'>CS 4320: Intro to Database Systems</li>
+                        <li className='coursework-text'>CS 3780: Intro to Machine Learning</li>
+                        <li className='coursework-text'>CS 3110: Data Structures & Functional Programming</li>
+                        <li className='coursework-text'>STSCI 4060: Python Programming and its Applications in Statistics</li>
                     </ul>
                 </div>
                 <div className='coursework-container'>  
-                    <h3>Spring 2024: (Freshmen)</h3>
+                    <h3>Spring 2024 :( : (Freshmen)</h3>
                     <ul className="coursework-list">
                         <li className='coursework-text'>CS 1998: Intro to Backend Development</li>
                         <li className='coursework-text'>CS 2110: Object-Oriented Programming & Data Structures</li>
