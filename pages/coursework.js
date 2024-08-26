@@ -29,7 +29,7 @@ function Coursework() {
                     </ul>
                 </div>
                 <div className='coursework-container'>  
-                    <h3>Spring 2024 :( : (Freshmen)</h3>
+                    <h3>Spring 2024 (Freshmen)   :(  </h3>
                     <ul className="coursework-list">
                         <li className='coursework-text'>CS 1998: Intro to Backend Development</li>
                         <li className='coursework-text'>CS 2110: Object-Oriented Programming & Data Structures</li>
