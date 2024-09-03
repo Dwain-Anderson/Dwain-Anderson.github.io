@@ -19,7 +19,7 @@ const projects = [
         projectDescription: 'A simple exam-scheduler project, utilizing web-scraping and SQL to retrieve exam data.',
         projectImageUrl: placeholder,
         hasProjectLink: true,
-        projectLink: ''
+        projectLink: 'https://github.com/Dwain-Anderson/cu-prelim-planner'
     },
     {
         projectTitle: 'Soundwave Analysis with Fourier Transform',
