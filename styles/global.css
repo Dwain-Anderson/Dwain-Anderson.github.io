@@ -2,24 +2,37 @@
 
 :root {
   /* Dark Winter Palette */
-  --bg:      #020617; /* Deep midnight navy/black */
-  --surface: rgba(15, 23, 42, 0.6); /* Translucent slate */
-  --border:  rgba(148, 163, 184, 0.1); /* Subtle frost border */
-  --text:    #f8fafc; /* Ice white */
-  --muted:   #94a3b8; /* Frozen slate grey */
-  --accent:  #a5f3fc; /* Frost cyan */
-  --radius:  6px;
-  --ease:    cubic-bezier(0.23, 1, 0.32, 1);
+  --bg:        #020617;
+  --surface:   rgba(8, 14, 30, 0.75);
+  --surface-hover: rgba(15, 25, 48, 0.88);
+  --border:    rgba(148, 163, 184, 0.1);
+  --border-hover: rgba(165, 243, 252, 0.25);
+  --text:      #f1f5f9;
+  --muted:     #94a3b8;
+  --accent:    #a5f3fc;
+  --accent-dim: rgba(165, 243, 252, 0.08);
+  --radius:    8px;
+  --ease:      cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Card image overlay — ensures dark text legibility over white-ish images */
+  --img-overlay: linear-gradient(
+    to bottom,
+    rgba(2, 6, 23, 0.68) 0%,
+    rgba(2, 6, 23, 0.82) 55%,
+    rgba(2, 6, 23, 0.97) 100%
+  );
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Geist', sans-serif;
   font-size: 15px;
-  background: radial-gradient(circle at top center, #0f172a 0%, #020617 100%);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(15, 30, 60, 0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(10, 20, 50, 0.5) 0%, transparent 60%);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
@@ -34,6 +47,18 @@ h1, h2, h3 {
 p { color: var(--muted); }
 a { color: inherit; text-decoration: none; }
 
+/* ── Noise texture overlay for depth ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
 /* ── Header: Frozen Glass ── */
 header {
   position: fixed;
@@ -42,132 +67,252 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  height: 60px;
+  padding: 0 48px;
+  height: 58px;
   border-bottom: 1px solid var(--border);
-  background: rgba(2, 6, 23, 0.7);
-  backdrop-filter: blur(20px);
+  background: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
 }
 
 header h1 {
   font-family: 'Geist', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
-nav ul { display: flex; gap: 32px; }
+nav ul { display: flex; gap: 36px; list-style: none; }
 nav ul li a {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  transition: color var(--ease);
+  transition: color 0.2s var(--ease);
 }
 nav ul li a:hover { color: var(--accent); }
 
 /* ── Main Layout ── */
-main, .main {
-  padding-top: 60px;
-}
+main, .main { padding-top: 58px; }
 
 .section-inner {
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 100px 40px;
+  padding: 100px 48px;
+  position: relative;
+  z-index: 1;
 }
 
-/* ── Projects: Clean & Readable ── */
+/* ── Section heading ── */
 .portfolio-h2 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  margin-bottom: 60px;
-  letter-spacing: -0.03em;
-  /* Soft glow on the heading */
-  text-shadow: 0 0 30px rgba(165, 243, 252, 0.15);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin-bottom: 56px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-shadow: 0 0 40px rgba(165, 243, 252, 0.1);
 }
 
+/* ── Project Grid ── */
 .project-gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px; /* Added gap for a cleaner grid look */
-  background: transparent;
+  gap: 14px;
 }
 
+/* ── Project Card ── */
 .project-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius);
-  padding: 32px;
-  transition: all var(--ease);
-  /* Remove old background images */
-  background-image: none !important; 
-  backdrop-filter: blur(4px);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* Image background (set via inline style: background-image: url(...)) */
+.project-item[style*="background-image"] {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Dark overlay so text is always readable over any image brightness */
+.project-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--img-overlay);
+  z-index: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+/* Frost shimmer top edge on hover */
+.project-item::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(165, 243, 252, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
 }
 
 .project-item:hover {
-  background: rgba(30, 41, 59, 0.5);
-  border-color: rgba(165, 243, 252, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(165, 243, 252, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-.project-title {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-  color: var(--text);
+.project-item:hover::after { opacity: 1; }
+
+/* Card inner content sits above overlay */
+.project-card-body {
+  position: relative;
+  z-index: 1;
+  padding: 28px 28px 26px;
 }
 
-.project-desc {
-  font-size: 0.92rem;
-  color: var(--muted);
-  line-height: 1.6;
+/* Cards without images keep a flat surface */
+.project-item.no-image {
+  min-height: unset;
+  justify-content: flex-start;
 }
 
-/* ── Tags: Small & Sharp ── */
+.project-item.no-image::before {
+  background: none;
+}
+
+.project-item.no-image .project-card-body {
+  padding: 28px;
+}
+
+/* ── Card meta row (tags top) ── */
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+/* ── Tags ── */
 .project-tag {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--accent);
-  background: rgba(165, 243, 252, 0.05);
-  border: 1px solid rgba(165, 243, 252, 0.15);
-  border-radius: 3px;
-  padding: 2px 8px;
+  background: rgba(165, 243, 252, 0.07);
+  border: 1px solid rgba(165, 243, 252, 0.18);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
 }
 
 .school-badge {
-  font-size: 0.6rem;
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--muted);
-  border: 1px solid var(--border);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+/* ── Card title & description ── */
+.project-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.25;
+  /* Subtle text shadow helps over images */
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: rgba(148, 163, 184, 0.9);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Card footer row ── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(148, 163, 184, 0.08);
 }
 
 .project-link-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   color: var(--accent);
+  font-size: 0.78rem;
   font-weight: 500;
-  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  transition: gap 0.2s var(--ease), opacity 0.2s;
 }
 
-/* ── Coursework ── */
+.project-link-label:hover { opacity: 0.8; gap: 8px; }
+
+.project-link-label svg {
+  width: 12px; height: 12px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* ── Coursework block ── */
 .coursework-container {
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* ── Footer ── */
 footer {
-  padding: 80px 40px;
+  position: relative;
+  z-index: 1;
+  padding: 80px 48px;
   border-top: 1px solid var(--border);
-  background: rgba(2, 6, 23, 0.5);
+  background: rgba(2, 6, 23, 0.6);
 }
 
 .footer-repo {
-  background: var(--text); /* Solid white button */
+  display: inline-block;
+  background: var(--text);
   color: var(--bg);
+  font-family: 'Geist', sans-serif;
   font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
   border-radius: var(--radius);
-  padding: 12px 30px;
+  padding: 11px 28px;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .footer-repo:hover {
@@ -175,8 +320,10 @@ footer {
   transform: scale(1.02);
 }
 
-/* ── Mobile ── */
+/* ── Responsive ── */
 @media (max-width: 768px) {
+  header { padding: 0 24px; }
+  .section-inner { padding: 72px 24px; }
   .project-gallery { grid-template-columns: 1fr; }
-  .section-inner { padding: 60px 24px; }
+  footer { padding: 60px 24px; }
 }
