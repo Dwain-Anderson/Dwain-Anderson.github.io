@@ -59,30 +59,41 @@ const SEMESTERS = [
     ],
   },
 ];
+
 function Coursework() {
   return (
     <div className="main-coursework">
       <Header />
 
-      <main
-        className="coursework-section"
-        style={{ backgroundImage: 'url(/assets/winter-6.jpg)' }}
-        aria-label="Coursework"
-      >
-        <h2 className="coursework-h2">Relevant Coursework</h2>
+      <main aria-label="Coursework">
 
-        <div className="coursework-grid">
-          {SEMESTERS.map(({ label, courses }) => (
-            <div className="coursework-container" key={label}>
-              <h3 className="coursework-semester">{label}</h3>
-              <ul className="coursework-list">
-                {courses.map(course => (
-                  <li key={course}>{course}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {/* Banner — winter image stays here, not on the whole page */}
+        <div className="section-banner">
+          <img src="/assets/winter-6.jpg" alt="" className="section-banner-img" />
+          <h2 className="section-heading">Relevant Coursework</h2>
         </div>
+
+        {/* Centered content column */}
+        <div className="section-inner">
+          <div className="coursework-container">
+            {SEMESTERS.map(({ label, courses }) => (
+              <div className="coursework-block" key={label}>
+                <p className="semester-label">{label}</p>
+                <ul className="course-list">
+                  {courses.map(course => {
+                    const [code, ...rest] = course.split(' · ');
+                    return (
+                      <li key={course}>
+                        <strong>{code}</strong> · {rest.join(' · ')}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </main>
 
       <Footer />

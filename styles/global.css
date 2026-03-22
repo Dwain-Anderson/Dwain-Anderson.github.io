@@ -349,53 +349,72 @@ main, .main {
 .project-link-label:hover { gap: 9px; }
 
 /* ════════════════════════════════
-   COURSEWORK
-   Semi-transparent glass panels so
-   the winter background shows through.
+   COURSEWORK — centered layout
 ════════════════════════════════ */
-.coursework-container {
-  background: rgba(15, 22, 41, 0.55);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: var(--radius);
-  padding: 32px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
+/* Section heading — centered like the banner headings */
+.coursework-heading {
+  text-align: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
 
-/* Each semester block inside coursework */
+/* Outer wrapper constrains and centers everything */
+.coursework-container {
+  max-width: 660px;           /* readable line length, centered */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Each semester block */
 .coursework-block {
-  background: rgba(9, 14, 28, 0.45);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(9, 14, 28, 0.5);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 8px;
-  padding: 20px 24px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: 22px 28px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;           /* courses stay left inside centered block */
 }
 .coursework-block:last-child { margin-bottom: 0; }
 
+/* Semester label e.g. "Spring 2026 · Junior (In Progress)" */
 .coursework-block .semester-label {
-  font-family: 'Geist', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #f1f5f9;
   margin-bottom: 10px;
+  font-style: italic;
 }
 
+/* Course list */
 .coursework-block .course-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .coursework-block .course-list li {
   font-family: 'Geist', sans-serif;
   font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.55;
+}
+
+/* Course code bold, name muted */
+.coursework-block .course-list li strong {
   color: #cbd5e1;
-  line-height: 1.5;
+  font-weight: 500;
 }
 
 /* ════════════════════════════════
