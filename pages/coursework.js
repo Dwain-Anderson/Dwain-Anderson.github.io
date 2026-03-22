@@ -1,50 +1,64 @@
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
 
-// ── Coursework Data ───────────────────────────────────────────────────────────
 const SEMESTERS = [
   {
-    label: 'Spring 2025 · Junior (Anticipated)',
+    label: 'Spring 2026 · Junior (In Progress)',
     courses: [
-      'CS 4820 · Introduction to Analysis of Algorithms',
-      'CS 3410 · Computer System Organization and Programming',
+      'STSCI 3200 · Statistics II',
       'STSCI 4520 · Statistical Computing',
-      'MATH 4720 · Statistics',
-      'ECON 3140 · Econometrics',
+      'STSCI 5065 · Big Data Management and Analysis',
+    ],
+  },
+  {
+    label: 'Fall 2025 · Junior',
+    courses: [
+      'CS 4414 · Systems Programming',
+      'STSCI 4030 · Linear Models with Matrices',
+      'STSCI 4090 · Theory of Statistics',
+    ],
+  },
+  {
+    label: 'Spring 2025 · Sophomore',
+    courses: [
+      'CS 3410 · Computer System Organization',
+      'CS 4300 · Language and Information',
+      'CS 4740 · Natural Language Processing',
+      'CS 4820 · Introduction to Analysis of Algorithms',
+      'ENGRG 3400 · Digital Tech & Innovation (Project Teams)',
     ],
   },
   {
     label: 'Fall 2024 · Sophomore',
     courses: [
-      'CS 4320 · Introduction to Database Systems',
-      'CS 3780 · Introduction to Machine Learning',
       'CS 3110 · Data Structures & Functional Programming',
-      'STSCI 4060 · Python Programming and its Applications in Statistics',
+      'CS 3780 · Introduction to Machine Learning',
+      'CS 4320 · Introduction to Database Systems',
+      'ENGRG 1400 · Project Team Onboarding',
+      'STSCI 4060 · Python Programming & Applications in Statistics',
     ],
   },
   {
     label: 'Spring 2024 · Freshman',
     courses: [
-      'CS 1998 · Introduction to Backend Development',
+      'CS 1998 · First-Year Team Projects',
       'CS 2110 · Object-Oriented Programming & Data Structures',
       'CS 2800 · Discrete Structures',
       'INFO 1260 · Choices and Consequences in Computing',
-      'INFO 2300 · Intermediate Web Programming',
+      'INFO 2300 · Intermediate Web Design & Programming',
       'MATH 4710 · Basic Probability',
     ],
   },
   {
     label: 'Fall 2023 · Freshman',
     courses: [
-      'CS 1110 · Introduction to Computing',
-      'CS 1998 · Introduction to iOS Development',
+      'CS 1110 · Introduction to Computing: Design & Development',
+      'CS 1998 · First-Year Team Projects',
       'INFO 1300 · Introduction to Web Design & Development',
       'MATH 2940 · Linear Algebra for Engineers',
     ],
   },
 ];
-
-// ── Page ──────────────────────────────────────────────────────────────────────
 function Coursework() {
   return (
     <div className="main-coursework">
