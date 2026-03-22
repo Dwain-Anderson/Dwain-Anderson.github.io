@@ -77,6 +77,10 @@ nav ul {
   list-style: none;
 }
 
+/* Kill any stray ::before bullet from global ul reset gap */
+nav ul li::before,
+nav ul li::after { display: none; content: none; }
+
 nav ul li a {
   display: inline-block;
   padding: 6px 14px;
@@ -85,7 +89,7 @@ nav ul li a {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #cbd5e1;             /* clearly visible slate */
+  color: #cbd5e1;
   border-radius: 6px;
   transition: color 0.18s, background 0.18s;
 }
@@ -95,6 +99,9 @@ nav ul li a.active {
   color: #f1f5f9;
   background: rgba(255,255,255,0.06);
 }
+
+/* The white dot was a <span> or divider — hide any non-anchor nav children */
+nav ul li:not(:has(a)) { display: none; }
 
 /* ════════════════════════════════
    PAGE SHELL
@@ -142,11 +149,13 @@ main, .main {
   pointer-events: none;
 }
 
-/* "Projects" sits in the banner, bottom-left, above the overlay */
+/* "Projects" — centered in the banner */
 .section-heading {
   position: absolute;
-  bottom: 24px;
-  left: 48px;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
   z-index: 4;
   font-family: 'Instrument Serif', serif;
   font-size: clamp(2rem, 4vw, 2.8rem);
@@ -154,7 +163,6 @@ main, .main {
   color: #f8fafc;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 20px rgba(0,0,0,0.85);
-  /* Never overlaps the card grid below */
   pointer-events: none;
 }
 
@@ -280,24 +288,63 @@ main, .main {
 
 /* ════════════════════════════════
    COURSEWORK
+   Semi-transparent glass panels so
+   the winter background shows through.
 ════════════════════════════════ */
 .coursework-container {
-  background: var(--card);
-  border: 1px solid var(--card-border);
+  background: rgba(15, 22, 41, 0.55);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: var(--radius);
   padding: 32px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Each semester block inside coursework */
+.coursework-block {
+  background: rgba(9, 14, 28, 0.45);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.coursework-block:last-child { margin-bottom: 0; }
+
+.coursework-block .semester-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.coursework-block .course-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coursework-block .course-list li {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.5;
 }
 
 /* ════════════════════════════════
-   FOOTER
-   Solid bg, no image bleed.
+   FOOTER — solid, fully readable
 ════════════════════════════════ */
 footer {
   position: relative;
-  z-index: 10;              /* above any background images */
-  background: #060a16;      /* solid — no transparency, no bleed */
+  z-index: 10;
+  background: #060c1a;
   border-top: 1px solid #1c2a42;
-  padding: 60px 48px 48px;
+  padding: 56px 48px 44px;
 }
 
 .footer-inner {
@@ -305,35 +352,60 @@ footer {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
 }
 
 .footer-inner h2,
 .footer-inner h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 400;
   color: #f1f5f9;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 }
 
-.footer-inner p {
+/* Highlighted text rows — dark blue chip behind each line */
+.footer-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(125, 211, 252, 0.07);
+  border: 1px solid rgba(125, 211, 252, 0.12);
+  border-radius: 6px;
+  padding: 7px 14px;
+  margin-bottom: 8px;
+  width: fit-content;
+  font-family: 'Geist', sans-serif;
   font-size: 0.875rem;
-  color: #64748b;
-  line-height: 1.6;
+  color: #cbd5e1;             /* clearly readable */
+  line-height: 1;
 }
 
-.footer-inner a:not(.footer-repo) {
+.footer-info a {
   color: var(--accent);
   transition: opacity 0.18s;
 }
-.footer-inner a:not(.footer-repo):hover { opacity: 0.75; }
+.footer-info a:hover { opacity: 0.75; }
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: #1c2a42;
+  margin: 20px 0;
+}
+
+.footer-built {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.78rem;
+  color: #475569;
+  letter-spacing: 0.03em;
+}
 
 .footer-repo {
   display: inline-block;
   margin-top: 24px;
   background: #f1f5f9;
-  color: #060a16;
+  color: #060c1a;
   font-family: 'Geist', sans-serif;
   font-weight: 600;
   font-size: 0.8rem;
@@ -353,7 +425,7 @@ footer {
 ════════════════════════════════ */
 @media (max-width: 768px) {
   header { padding: 0 20px; }
-  .section-heading { left: 20px; bottom: 20px; font-size: 1.8rem; }
+  .section-heading { left: 0; right: 0; bottom: 20px; font-size: 1.8rem; text-align: center; }
   .section-inner { padding: 36px 20px 64px; }
   .project-gallery { grid-template-columns: 1fr; }
   footer { padding: 48px 20px 36px; }
