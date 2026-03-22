@@ -13,14 +13,6 @@ function Footer() {
           Built with React · JavaScript · HTML · CSS
         </span>
 
-        <a
-          className="footer-repo"
-          href="https://github.com/Dwain-Anderson/Dwain-Anderson.github.io"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Source on GitHub
-        </a>
       </div>
     </footer>
   );
