@@ -1,7 +1,6 @@
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
 import PortfolioDeckOfCards from '../components/PortfolioDeckOfCards.js';
-import '../styles/global.css';
 
 function Home() {
   return (
