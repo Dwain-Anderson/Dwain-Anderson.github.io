@@ -6,16 +6,18 @@ function Home() {
   return (
     <div className="main">
       <Header />
+      <main aria-label="Portfolio projects">
 
-      <main
-        className="home"
-        style={{ backgroundImage: 'url(/assets/winter-8.jpg)' }}
-        aria-label="Portfolio projects"
-      >
-        <h2 className="portfolio-h2">Projects</h2>
-        <PortfolioDeckOfCards />
+        <div className="section-banner">
+          <img src="/assets/winter-8.jpg" alt="" className="section-banner-img" />
+          <h2 className="section-heading">Projects</h2>
+        </div>
+
+        <div className="section-inner">
+          <PortfolioDeckOfCards />
+        </div>
+
       </main>
-
       <Footer />
     </div>
   );

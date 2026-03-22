@@ -238,22 +238,56 @@ main, .main {
 }
 
 /* ════════════════════════════════
-   PROJECT GRID
+   PROJECT GRIDS
 ════════════════════════════════ */
 .project-gallery {
+  list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
+/* Featured — 2 equal cols, taller cards */
+.project-gallery--featured {
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 0;
+}
+
+/* School — 2 cols, slightly more compact */
+.project-gallery--school {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── Divider between sections ── */
+.gallery-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 20px;
+}
+.gallery-divider::before,
+.gallery-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #1c2a42;
+}
+.gallery-divider-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #475569;
+  white-space: nowrap;
+}
+
 /* ════════════════════════════════
-   PROJECT CARD
+   BASE CARD
 ════════════════════════════════ */
 .project-item {
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 26px 26px 22px;
   display: flex;
   flex-direction: column;
   transition:
@@ -261,16 +295,72 @@ main, .main {
     border-color 0.2s var(--ease),
     transform    0.22s var(--ease),
     box-shadow   0.22s var(--ease);
+  overflow: hidden;
+}
+
+/* Cards wrap their content in an <a> or <div> — both need full height flex */
+.project-item > a,
+.project-item > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 26px 26px 22px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .project-item:hover {
-  background: var(--card-hover);
   border-color: #2a4060;
   transform: translateY(-2px);
-  box-shadow: 0 10px 36px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.4);
 }
 
-/* ── School badge (sits above title) ── */
+/* ── Featured card — accent top border + richer bg ── */
+.project-item--featured {
+  background: #0d1a30;
+  border-color: #1e3050;
+}
+.project-item--featured::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(125,211,252,0.2));
+  flex-shrink: 0;
+}
+.project-item--featured:hover {
+  border-color: rgba(125,211,252,0.35);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(125,211,252,0.08);
+}
+
+/* Linked cards get a pointer */
+.project-item--linked { cursor: pointer; }
+
+/* ── Meta row (badges) ── */
+.card-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  min-height: 22px;
+}
+
+/* ── Featured badge ── */
+.featured-badge {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(125,211,252,0.08);
+  border: 1px solid rgba(125,211,252,0.2);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+/* ── School badge ── */
 .school-badge {
   display: inline-block;
   font-family: 'Geist', sans-serif;
@@ -282,7 +372,6 @@ main, .main {
   border: 1px solid #1c2a42;
   border-radius: 4px;
   padding: 3px 8px;
-  margin-bottom: 10px;
   width: fit-content;
 }
 
@@ -295,6 +384,9 @@ main, .main {
   line-height: 1.25;
   margin-bottom: 8px;
 }
+.project-item--featured .project-title {
+  font-size: 1.35rem;
+}
 
 /* ── Description ── */
 .project-desc {
@@ -302,16 +394,26 @@ main, .main {
   font-size: 0.865rem;
   color: #94a3b8;
   line-height: 1.7;
-  margin-bottom: 18px;
   flex: 1;
+  margin-bottom: 18px;
 }
 
-/* ── Tags — inline flex, NOT a list ── */
+/* ── Card footer ── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid #1c2a42;
+  margin-top: auto;
+}
+
+/* ── Tags ── */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 18px;
 }
 
 .project-tag {
@@ -329,24 +431,20 @@ main, .main {
   white-space: nowrap;
 }
 
-/* ── Card footer ── */
-.card-footer {
-  padding-top: 14px;
-  border-top: 1px solid #1c2a42;
-  margin-top: auto;
-}
-
+/* ── Link label ── */
 .project-link-label {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   color: var(--accent);
   font-family: 'Geist', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: gap 0.18s var(--ease);
 }
-.project-link-label:hover { gap: 9px; }
+.project-item:hover .project-link-label { gap: 8px; }
 
 /* ════════════════════════════════
    COURSEWORK — centered layout
