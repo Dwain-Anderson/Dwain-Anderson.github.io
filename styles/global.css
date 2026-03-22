@@ -211,12 +211,12 @@ main, .main {
   pointer-events: none;
 }
 
-/* "Projects" — centered in the banner */
 .section-heading {
   position: absolute;
   bottom: 28px;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
   text-align: center;
   z-index: 4;
   font-family: 'Instrument Serif', serif;
@@ -406,7 +406,7 @@ footer {
   z-index: 10;
   background: #060c1a;
   border-top: 1px solid #1c2a42;
-  padding: 40px 48px 36px;
+  padding: 32px 48px 28px;
 }
 
 .footer-inner {
@@ -414,17 +414,17 @@ footer {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;   /* left-align everything */
+  align-items: flex-start;
   gap: 0;
 }
 
 .footer-inner h2,
 .footer-inner h3 {
   font-family: 'Instrument Serif', serif;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 400;
   color: #f1f5f9;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .footer-info {
@@ -433,12 +433,12 @@ footer {
   gap: 6px;
   background: rgba(125, 211, 252, 0.06);
   border: 1px solid rgba(125, 211, 252, 0.1);
-  border-radius: 6px;
-  padding: 5px 12px;
-  margin-bottom: 6px;
+  border-radius: 5px;
+  padding: 4px 10px;
+  margin-bottom: 5px;
   width: fit-content;
   font-family: 'Geist', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: #cbd5e1;
   line-height: 1;
 }
@@ -449,31 +449,17 @@ footer {
 }
 .footer-info a:hover { opacity: 0.75; }
 
-.footer-divider {
-  width: 100%;
-  height: 1px;
-  background: #1c2a42;
-  margin: 16px 0;
-}
-
-.footer-built {
-  font-family: 'Geist', sans-serif;
-  font-size: 0.78rem;
-  color: #475569;
-  letter-spacing: 0.03em;
-}
-
 .footer-repo {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 14px;
   background: #f1f5f9;
   color: #060c1a;
   font-family: 'Geist', sans-serif;
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
-  border-radius: 8px;
-  padding: 9px 22px;
+  border-radius: 7px;
+  padding: 8px 20px;
   width: fit-content;
   transition: background 0.18s, transform 0.18s;
 }
